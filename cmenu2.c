@@ -56,16 +56,21 @@ int countEven(node *head) {
     return cnt;
 }
 
+// Ham average an toan: tra ve 0.0 neu danh sach rong (tranh chia cho 0)
 double average(node *head) {
+    if (head == NULL) return 0.0; // danh sach rong
     long long sum = 0;
     int cnt = 0;
     for (node *p = head; p != NULL; p = p->next) {
         sum += p->data;
         cnt++;
     }
+    if (cnt == 0) return 0.0; // bao ve them
     return (double)sum / (double)cnt;
 }
 
+// Ham averageEven an toan: tra ve NAN neu khong co so chan duong
+// Nguoi goi co the kiem tra isnan() de hien thi thong bao phu hop
 double averageEven(node *head) {
     long long sum = 0;
     int cnt = 0;
@@ -75,6 +80,7 @@ double averageEven(node *head) {
             cnt++;
         }
     }
+    if (cnt == 0) return NAN; // khong co phan tu chan duong
     return (double)sum / (double)cnt;
 }
 
@@ -185,7 +191,7 @@ void printList(node *head) {
     node *temp = head;
     printf("Danh sach hien tai : ");
     while(temp != NULL) {
-        printf("%d ", temp->data);\
+        printf("%d ", temp->data);
         temp = temp->next;
     }
     printf("\n");
@@ -268,8 +274,20 @@ int main(){
             case 5 :
                 system("cls");
                 printf("So phan tu chan duong trong danh sach la : %d\n", countEven(head));
-                printf("Trung binh cong cac phan tu trong danh sach la : %.4lf\n", average(head));
-                printf("Trung binh cong cac phan tu chan duong trong danh sach la : %.4lf\n", averageEven(head));
+                {
+                    double avgAll = average(head);
+                    if (head == NULL) {
+                        printf("Danh sach rong - khong the tinh trung binh cac phan tu.\n");
+                    } else {
+                        printf("Trung binh cong cac phan tu trong danh sach la : %.4lf\n", avgAll);
+                    }
+                    double avgEvenPos = averageEven(head);
+                    if (isnan(avgEvenPos)) {
+                        printf("Khong co phan tu chan duong de tinh trung binh.\n");
+                    } else {
+                        printf("Trung binh cong cac phan tu chan duong trong danh sach la : %.4lf\n", avgEvenPos);
+                    }
+                }
                 break;
             case 6 :
                 system("cls");
