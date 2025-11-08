@@ -71,6 +71,7 @@ double average(node *head) {
 
 // Ham averageEven an toan: tra ve NAN neu khong co so chan duong
 // Nguoi goi co the kiem tra isnan() de hien thi thong bao phu hop
+// (Trong phien ban nay giu cach in don gian, se hien thi "nan" neu khong co so chan duong.)
 double averageEven(node *head) {
     long long sum = 0;
     int cnt = 0;
@@ -274,20 +275,8 @@ int main(){
             case 5 :
                 system("cls");
                 printf("So phan tu chan duong trong danh sach la : %d\n", countEven(head));
-                {
-                    double avgAll = average(head);
-                    if (head == NULL) {
-                        printf("Danh sach rong - khong the tinh trung binh cac phan tu.\n");
-                    } else {
-                        printf("Trung binh cong cac phan tu trong danh sach la : %.4lf\n", avgAll);
-                    }
-                    double avgEvenPos = averageEven(head);
-                    if (isnan(avgEvenPos)) {
-                        printf("Khong co phan tu chan duong de tinh trung binh.\n");
-                    } else {
-                        printf("Trung binh cong cac phan tu chan duong trong danh sach la : %.4lf\n", avgEvenPos);
-                    }
-                }
+                printf("Trung binh cong cac phan tu trong danh sach la : %.4lf\n", average(head));
+                printf("Trung binh cong cac phan tu chan duong trong danh sach la : %.4lf\n", averageEven(head));
                 break;
             case 6 :
                 system("cls");
